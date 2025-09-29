@@ -329,3 +329,23 @@ class MomentumBot:
         self.stop_loss = 0
         self.take_profit = 0
         self.entry_price = 0
+
+    def execute_trade(self, signal_type, price, position_size, stop_loss, take_profit):
+        """
+        Executes a trade and updates account balance and position status.
+        """
+        if signal_type not in ["BUY", "SELL"]:
+            return "Invalid trade signal."
+
+        # Mark as in position and store trade details
+        self.in_position = True
+        self.last_trade = {
+            "type": signal_type,
+            "price": price,
+            "size": position_size,
+            "stop_loss": stop_loss,
+            "take_profit": take_profit
+        }
+        # Example: Deduct position value from balance (for demo purposes)
+        self.account_balance -= position_size * price
+        return f"{signal_type} trade executed at {price:.4f} (size: {position_size}, SL: {stop_loss}, TP: {take_profit})"

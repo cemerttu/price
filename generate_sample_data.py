@@ -3,8 +3,8 @@ import pandas as pd
 import numpy as np
 
 def calculate_indicators(df):
-    df['EMA_10'] = df['Close'].ewm(span=10, adjust=False).mean()
-    df['EMA_20'] = df['Close'].ewm(span=20, adjust=False).mean()
+    df['EMA_13'] = df['Close'].ewm(span=13, adjust=False).mean()
+    df['EMA_23'] = df['Close'].ewm(span=23, adjust=False).mean()
     delta = df['Close'].diff()
     gain = (delta.where(delta > 0, 0)).rolling(window=14).mean()
     loss = (-delta.where(delta < 0, 0)).rolling(window=14).mean()
